@@ -88,9 +88,11 @@ public class UserServiceImpl implements UserService{
         request.setEmail(userDetail.getEmail());
         request.setName(userDetail.getFullName());
         request.setPhone(userDetail.getPhone());
+        if(userDetail.getPassword() != null) {
+            request.setPassword(passwordEncoder.encode(userDetail.getPassword()));
+        }
         userRepository.save(request);
-        UserResponse userResponse = new UserResponse(id, request.getEmail(), request.getStatus());
-        return userResponse;
+        return UserResponse.from(request);
     }
 
 
