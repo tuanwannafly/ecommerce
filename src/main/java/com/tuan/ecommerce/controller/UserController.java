@@ -105,7 +105,7 @@ public class UserController {
     }
 
     @ExceptionHandler(value = UserAlreadyExistsException .class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.CONFLICT)
     public ErrorResponse handleUserExistsException(UserAlreadyExistsException  ex) {
         return new ErrorResponse(HttpStatus.CONFLICT.value(), ex.getMessage());
     }
