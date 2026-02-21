@@ -52,10 +52,9 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Optional<UserResponse> getUserById(Long id) {
+    public UserResponse getUserById(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new NoSuchUserExistsException("User not found" + id));
-        UserResponse userResponse = new UserResponse(user.getId(),user.getEmail(), user.getStatus());
-        return Optional.ofNullable(userResponse);
+        return UserResponse.from(user);
         
     }
 

@@ -2,7 +2,6 @@ package com.tuan.ecommerce.controller;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -48,9 +47,8 @@ public class UserController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> getUserById(@PathVariable("id") Long userId) {
-        Optional<UserResponse> user = userService.getUserById(userId);
-        return user.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        UserResponse user = userService.getUserById(userId);
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping

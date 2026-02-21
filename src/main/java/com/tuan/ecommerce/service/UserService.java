@@ -1,7 +1,6 @@
 package com.tuan.ecommerce.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 
@@ -13,7 +12,7 @@ public interface  UserService {
 
 
     Page<UserResponse> getAllUser(int page, int size);
-    Optional<UserResponse> getUserById(Long userId);
+    UserResponse getUserById(Long userId);
     UserResponse CreateUser(CreateUserRequest user);
     UserResponse UpdateUser(Long id, CreateUserRequest userDetail);
     UserResponse patchUser(Long id, PatchUserRequest request);
