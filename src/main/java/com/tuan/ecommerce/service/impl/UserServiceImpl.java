@@ -1,9 +1,7 @@
 package com.tuan.ecommerce.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -173,12 +171,12 @@ public class UserServiceImpl implements UserService{
     @Transactional
     public void removeRole(Long userId, Long roleId) {
         User user = userRepository.findById(userId)
-        .orElseThrow(() -> new NoSuchUserExistsException("User not found"));
+            .orElseThrow(() -> new NoSuchUserExistsException("User not found"));
     
         Role role = roleRepository.findById(roleId)
-        .orElseThrow(() -> new RuntimeException("Role not found"));
+            .orElseThrow(() -> new RuntimeException("Role not found"));
         user.removeRole(role);
-        userRoleRepository.deleteUserRole(userId, roleId);
+        userRepository.save(user);
     }
 
     @Override
