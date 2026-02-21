@@ -1,5 +1,7 @@
 package com.tuan.ecommerce.domain.RBAC;
 
+import java.util.Objects;
+
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -50,4 +52,19 @@ public class UserRole {
     public User getUser() {
         return user;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+        UserRole that = (UserRole) o;
+        return Objects.equals(userRoleId, that.userRoleId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userRoleId);
+    }
+
+
 }
