@@ -53,13 +53,13 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserResponse> createUser(@Valid @RequestBody CreateUserRequest request) {
-        UserResponse user = userService.CreateUser(request);
+        UserResponse user = userService.createUser(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
     
     @PutMapping("/{id}")
     public ResponseEntity<UserResponse> updateUser(@PathVariable Long id,@Valid @RequestBody CreateUserRequest request) {
-        UserResponse user = userService.UpdateUser(id, request);
+        UserResponse user = userService.updateUser(id, request);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 

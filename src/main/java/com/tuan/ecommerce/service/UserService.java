@@ -13,8 +13,8 @@ public interface  UserService {
 
     Page<UserResponse> getAllUser(int page, int size);
     UserResponse getUserById(Long userId);
-    UserResponse CreateUser(CreateUserRequest user);
-    UserResponse UpdateUser(Long id, CreateUserRequest userDetail);
+    UserResponse createUser(CreateUserRequest user);
+    UserResponse updateUser(Long id, CreateUserRequest userDetail);
     UserResponse patchUser(Long id, PatchUserRequest request);
     UserResponse lockUser(Long id);
     UserResponse activateUser(Long id);

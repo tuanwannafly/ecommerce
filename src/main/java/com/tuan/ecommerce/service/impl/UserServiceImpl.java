@@ -43,6 +43,7 @@ public class UserServiceImpl implements UserService{
         this.userRoleRepository = userRoleRepository;
     }
 
+    @Override
     @Transactional(readOnly = true)
     public Page<UserResponse> getAllUser(int page, int size) {
         Page<User> users = userRepository.findAll(PageRequest.of(page, size)); 
@@ -60,7 +61,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional
-    public UserResponse CreateUser(CreateUserRequest request) {
+    public UserResponse createUser(CreateUserRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new UserAlreadyExistsException("Email already exists");
         }
@@ -82,7 +83,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional
-    public UserResponse UpdateUser(Long id, CreateUserRequest userDetail) {
+    public UserResponse updateUser(Long id, CreateUserRequest userDetail) {
         User request = userRepository.findById(id)
                 .orElseThrow(() -> new NoSuchUserExistsException("User not found: " + id));
         if(userDetail.getEmail() != null 
