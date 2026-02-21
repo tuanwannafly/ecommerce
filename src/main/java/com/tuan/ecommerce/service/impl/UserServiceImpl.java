@@ -176,6 +176,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<String> getUserRoles(Long id) {
         User user = userRepository.findById(id)
             .orElseThrow(() -> new NoSuchUserExistsException("User not found"));
