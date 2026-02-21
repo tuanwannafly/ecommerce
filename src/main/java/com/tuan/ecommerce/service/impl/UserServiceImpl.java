@@ -2,6 +2,7 @@ package com.tuan.ecommerce.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.dao.DataIntegrityViolationException;
@@ -155,7 +156,7 @@ public class UserServiceImpl implements UserService{
             .orElseThrow(() -> new NoSuchUserExistsException("User not found"));
 
         Role role = roleRepository.findById(roleId)
-            .orElseThrow(() -> new RuntimeException("Role not found"));
+            .orElseThrow(() -> new NoSuchElementException("Role not found"));
         user.assignRole(role);
 
         userRepository.save(user);
