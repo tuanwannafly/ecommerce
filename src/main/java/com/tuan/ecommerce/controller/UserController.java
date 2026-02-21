@@ -59,13 +59,13 @@ public class UserController {
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<UserResponse> updateUser(@PathVariable Long id, @RequestBody CreateUserRequest request) {
+    public ResponseEntity<UserResponse> updateUser(@PathVariable Long id,@Valid @RequestBody CreateUserRequest request) {
         UserResponse user = userService.UpdateUser(id, request);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<UserResponse> patchUser(@PathVariable Long id, @RequestBody PatchUserRequest request) {
+    public ResponseEntity<UserResponse> patchUser(@PathVariable Long id,@Valid @RequestBody PatchUserRequest request) {
         UserResponse user = userService.patchUser(id, request);
         return ResponseEntity.ok(user);
     }
