@@ -163,8 +163,15 @@ public class UserServiceImpl implements UserService{
         return UserResponse.from(user);
     }
 
+    @Override
     @Transactional
     public void removeRole(Long userId, Long roleId) {
+        User user = userRepository.findById(userId)
+        .orElseThrow(() -> new NoSuchUserExistsException("User not found"));
+    
+        Role role = roleRepository.findById(roleId)
+        .orElseThrow(() -> new RuntimeException("Role not found"));
+        user.removeRole(role);
         userRoleRepository.deleteUserRole(userId, roleId);
     }
 
