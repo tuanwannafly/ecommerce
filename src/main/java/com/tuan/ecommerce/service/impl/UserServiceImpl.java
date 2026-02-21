@@ -84,8 +84,8 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public UserResponse UpdateUser(Long id, CreateUserRequest userDetail) {
-        Optional<User> existUser = userRepository.findById(id);
-        User request =  existUser.get();
+        User request = userRepository.findById(id)
+                .orElseThrow(() -> new NoSuchUserExistsException("User not found: " + id));
         request.setEmail(userDetail.getEmail());
         request.setName(userDetail.getFullName());
         request.setPhone(userDetail.getPhone());
@@ -133,8 +133,7 @@ public class UserServiceImpl implements UserService{
         User user = userRepository.findById(id).orElseThrow(() -> new NoSuchUserExistsException("User not found"));
         user.lock();
          userRepository.save(user);
-         UserResponse userResponse = new UserResponse(id, user.getEmail(), user.getStatus());
-         return userResponse;
+         return UserResponse.from(user);
     }
 
 
