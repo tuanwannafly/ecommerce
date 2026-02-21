@@ -87,6 +87,11 @@ public class UserServiceImpl implements UserService{
     public UserResponse UpdateUser(Long id, CreateUserRequest userDetail) {
         User request = userRepository.findById(id)
                 .orElseThrow(() -> new NoSuchUserExistsException("User not found: " + id));
+        if(userDetail.getEmail() != null 
+            && !userDetail.getEmail().equals(request.getEmail())
+            && userRepository.existsByEmail(userDetail.getEmail())) {
+                throw new UserAlreadyExistsException("Email already exists");
+            }
         request.setEmail(userDetail.getEmail());
         request.setName(userDetail.getFullName());
         request.setPhone(userDetail.getPhone());
