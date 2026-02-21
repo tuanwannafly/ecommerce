@@ -88,12 +88,12 @@ public class  User extends BaseEntity{
             throw  new IllegalStateException("Role cannot be null");
         }
 
-        UserRole userRole = new UserRole(role, this);
-
-        if(this.userRole.contains(userRole)) {
+        boolean alreadyAssigned = this.userRole.stream()
+                .anyMatch(ur -> ur.getRoles().getId().equals(role.getId()));
+        if(alreadyAssigned) {
             throw  new IllegalStateException("User already has this role");
         }
-        this.userRole.add(userRole);
+        this.userRole.add(new UserRole(role, this));
 
     }
 
