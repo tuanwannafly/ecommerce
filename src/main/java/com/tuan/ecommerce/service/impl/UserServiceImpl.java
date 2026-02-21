@@ -109,7 +109,7 @@ public class UserServiceImpl implements UserService{
         User user = userRepository.findById(id).orElseThrow(() -> new NoSuchUserExistsException("User not found" + id));
         if(request.getEmail() != null) {
             
-                if(userRepository.existsByEmail(request.getEmail())) {
+                if(userRepository.existsByEmail(request.getEmail()) && userRepository.existsByEmail(request.getEmail())) {
                      throw new UserAlreadyExistsException("Email already exists");
                 }
                 user.setEmail(request.getEmail());
