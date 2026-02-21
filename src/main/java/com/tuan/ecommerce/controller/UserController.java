@@ -82,9 +82,9 @@ public class UserController {
     }
 
     @PostMapping("/{id}/roles")
-    public ResponseEntity<Void> assignRole(@PathVariable Long id, @RequestBody AssignRoleRequest request) {
-        userService.assignRole(id, request.getRoleId());
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<UserResponse> assignRole(@PathVariable Long id,@Valid @RequestBody AssignRoleRequest request) {
+        UserResponse updated = userService.assignRole(id, request.getRoleId());
+        return ResponseEntity.ok(updated);
     }
     @DeleteMapping("/{id}/roles/{roleId}")
     public ResponseEntity<Void> removeRole(@PathVariable Long id, @PathVariable Long roleId) {
