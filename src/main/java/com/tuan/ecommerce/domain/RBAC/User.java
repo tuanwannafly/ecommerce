@@ -99,7 +99,7 @@ public class  User extends BaseEntity{
 
     public void removeRole(Role role) {
         UserRole target = userRole.stream()
-            .filter(ur -> ur.getRoles().getId().equals(role))
+            .filter(ur -> ur.getRoles().getId().equals(role.getId()))
             .findFirst()
             .orElseThrow(() -> 
                 new IllegalStateException("User does not have this role")
