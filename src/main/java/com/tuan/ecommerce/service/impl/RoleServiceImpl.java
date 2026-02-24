@@ -1,7 +1,6 @@
 package com.tuan.ecommerce.service.impl;
 
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -38,8 +37,8 @@ public class RoleServiceImpl implements RoleService{
         return roles.map(RoleResponse::from);
     }
 
-    `@Override`
-    `@Transactional`(readOnly = true)
+    @Override
+    @Transactional(readOnly = true)
     public RoleResponse getRoleById(Long roleId) {
         Role role = roleRepository.findById(roleId)
             .orElseThrow(() -> new NoSuchElementException("Role not found with id: " + roleId));
@@ -58,8 +57,8 @@ public class RoleServiceImpl implements RoleService{
         return RoleResponse.from(role1);
     }
 
-    `@Override`
-    `@Transactional`
+    @Override
+    @Transactional
     public RoleResponse updateRole(Long id, CreateRoleRequest roleDetail) {
         Role role = roleRepository.findById(id)
             .orElseThrow(() -> new NoSuchElementException("Role not found with id: " + id));

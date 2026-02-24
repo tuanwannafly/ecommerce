@@ -13,12 +13,12 @@ public class CreateRoleRequest {
     public String getDescription() {
         return description;
     }
-    `@JsonCreator`
+    @JsonCreator
     public CreateRoleRequest(
-            `@JsonProperty`("name") String name,
-            `@JsonProperty`("description") String description) {
+            @JsonProperty("name") String name,
+            @JsonProperty("description") String description) {
         this.name = name;
         this.description = description;
     }
 }
-}
+

@@ -47,22 +47,22 @@ public class UserPrincipal implements UserDetails {
         return user.getEmail();
     }
 
-    `@Override`
+    @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
-    `@Override`
+    @Override
     public boolean isAccountNonLocked() {
         return user.getStatus() != com.tuan.ecommerce.domain.enumeration.Status.INACTIVE;
     }
 
-    `@Override`
+    @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
-    `@Override`
+    @Override
     public boolean isEnabled() {
         return user.getStatus() == com.tuan.ecommerce.domain.enumeration.Status.ACTIVE;
     }
