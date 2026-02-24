@@ -27,7 +27,5 @@ public class Permission {
         this.description = description;
     }
 
-    protected Permission() {}
-
-    
+    public Permission() {}
 }

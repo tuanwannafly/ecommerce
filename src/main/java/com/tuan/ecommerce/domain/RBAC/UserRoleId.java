@@ -11,21 +11,17 @@ public class UserRoleId implements Serializable{
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(name = "roles_id")
-    private Long rolesId;
+    @Column(name = "role_id")
+    private Long roleId;
 
     public UserRoleId() {
 
     }
 
-    
-
-    public UserRoleId(Long userId, Long rolesId) {
+    public UserRoleId(Long userId, Long roleId) {
         this.userId = userId;
-        this.rolesId = rolesId;
+        this.roleId = roleId;
     }
-
-
 
     @Override
     public boolean equals(Object o) {
@@ -33,11 +29,11 @@ public class UserRoleId implements Serializable{
         if(o == null || getClass() != o.getClass()) return false;
         UserRoleId userRolesId = (UserRoleId) o;
         return Objects.equals(userId, userRolesId.userId) &&
-               Objects.equals(rolesId, userRolesId.rolesId);
+               Objects.equals(roleId, userRolesId.roleId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(rolesId, userId);
+        return Objects.hash(roleId, userId);
     }
 }

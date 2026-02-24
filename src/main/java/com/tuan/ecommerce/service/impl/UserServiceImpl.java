@@ -163,8 +163,6 @@ public class UserServiceImpl implements UserService{
         Role role = roleRepository.findById(roleId)
             .orElseThrow(() -> new NoSuchElementException("Role not found"));
         user.assignRole(role);
-
-        userRepository.save(user);
         return UserResponse.from(user);
     }
 
@@ -187,7 +185,7 @@ public class UserServiceImpl implements UserService{
             .orElseThrow(() -> new NoSuchUserExistsException("User not found"));
 
     return user.getUserRoles().stream()
-            .map(ur -> ur.getRoles().getName())
+            .map(ur -> ur.getRole().getName())
             .toList();
         
     }

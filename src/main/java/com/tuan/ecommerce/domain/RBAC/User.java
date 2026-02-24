@@ -44,7 +44,6 @@ public class  User extends BaseEntity{
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<UserRole> userRole = new HashSet<>();
 
-
     public User() {
 
     }
@@ -55,8 +54,6 @@ public class  User extends BaseEntity{
         this.phone = phone;
         this.status = Status.ACTIVE;
     }
-
-
 
     @PrePersist
     protected void onCreate() {
@@ -89,7 +86,7 @@ public class  User extends BaseEntity{
         }
 
         boolean alreadyAssigned = this.userRole.stream()
-                .anyMatch(ur -> ur.getRoles().getId().equals(role.getId()));
+                .anyMatch(ur -> ur.getRole().getId().equals(role.getId()));
         if(alreadyAssigned) {
             throw  new IllegalStateException("User already has this role");
         }
@@ -99,7 +96,7 @@ public class  User extends BaseEntity{
 
     public void removeRole(Role role) {
         UserRole target = userRole.stream()
-            .filter(ur -> ur.getRoles().getId().equals(role.getId()))
+            .filter(ur -> ur.getRole().getId().equals(role.getId()))
             .findFirst()
             .orElseThrow(() -> 
                 new IllegalStateException("User does not have this role")
