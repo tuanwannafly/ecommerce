@@ -33,13 +33,6 @@ public class Role extends BaseEntity{
         return rolePermission;
     }
 
-    public void assignPermission(Permission permission) {
-        if(permission == null) {
-            throw  new IllegalStateException("Permission cannot be null");
-        }
-        this.rolePermission.add(new RolePermission(permission, this));
-    }
-
     public void removePermission(Permission permission) {
         RolePermission target = rolePermission.stream()
             .filter(ur -> ur.getPermission().getPermissionId().equals(permission.getPermissionId()))
@@ -52,15 +45,9 @@ public class Role extends BaseEntity{
 
     public void addPermission(Permission permission) {
         if (permission == null) {
-        throw new IllegalArgumentException("Permission cannot be null");
+            throw new IllegalArgumentException("Permission cannot be null");
         }
-
-        if (this.rolePermission == null) {
-            this.rolePermission = new HashSet<>();
-        }
-
-        RolePermission rp = new RolePermission(permission, this);
-        this.rolePermission.add(rp);
+        this.rolePermission.add(new RolePermission(permission, this));
     }
 
     
