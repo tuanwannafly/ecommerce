@@ -4,7 +4,6 @@ import java.util.Objects;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
@@ -21,11 +20,10 @@ public class UserRole {
     @EmbeddedId
     private UserRoleId userRoleId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("rolesId")
-    @JoinColumn(name = "roles_id", nullable = false)
-    private Role roles;
-
+    @ManyToOne
+    @MapsId("roleId")
+    @JoinColumn(name = "role_id", nullable = false)
+    private Role role;
 
     @ManyToOne
     @MapsId("userId")
@@ -36,17 +34,17 @@ public class UserRole {
 
     }
 
-    public UserRole(Role roles, User user) {
-        this.roles = roles;
+    public UserRole(Role role, User user) {
+        this.role = role;
         this.user = user;
         this.userRoleId = new UserRoleId(
                 user.getId(),
-                roles.getId()
+                role.getId()
         );
     }
 
-    public Role getRoles() {
-        return roles;
+    public Role getRole() {
+        return role;
     }
 
     public User getUser() {
@@ -65,6 +63,5 @@ public class UserRole {
     public int hashCode() {
         return Objects.hash(userRoleId);
     }
-
 
 }

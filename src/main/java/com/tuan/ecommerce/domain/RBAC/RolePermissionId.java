@@ -14,8 +14,6 @@ public class RolePermissionId implements Serializable {
     @Column(name = "permission_id")
     private Long permissionId;
 
-    
-
     public RolePermissionId(Long roleId, Long permissionId) {
         this.roleId = roleId;
         this.permissionId = permissionId;

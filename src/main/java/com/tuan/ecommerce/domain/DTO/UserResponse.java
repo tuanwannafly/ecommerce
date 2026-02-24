@@ -12,13 +12,13 @@ public class UserResponse {
     private String email;
 
     private Status status;
-    private Set<String> rolesName;
+    private Set<String> roleName;
 
-    public UserResponse(Long id, String email, Status status, Set<String> roleNames) {
+    public UserResponse(Long id, String email, Status status, Set<String> roleName) {
         this.email = email;
         this.id = id;
         this.status = status;
-        this.rolesName = roleNames;
+        this.roleName = roleName;
     }
 
     
@@ -48,7 +48,7 @@ public class UserResponse {
 
         Set<String> roles = user.getUserRoles()
                 .stream()
-                .map(ur -> ur.getRoles().getName())
+                .map(ur -> ur.getRole().getName())
                 .collect(Collectors.toSet());
 
         return new UserResponse(
@@ -66,8 +66,8 @@ public class UserResponse {
     public Status getStatus() {
         return status;
     }
-    public Set<String> getRoles() {
-        return rolesName;
+    public Set<String> getRole() {
+        return roleName;
     }
 }
 

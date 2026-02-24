@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,24 +40,30 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
+    @PreAuthorize("hasAuthority('USER_VIEW_ALL')")
     @GetMapping
     public ResponseEntity<Page<UserResponse>> getAllUsers(@RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         Page<UserResponse> userResponses  = userService.getAllUser(page, size);
         return  ResponseEntity.ok(userResponses);
     }
+
+    @PreAuthorize("hasAuthority('USER_VIEW')")
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> getUserById(@PathVariable("id") Long userId) {
         UserResponse user = userService.getUserById(userId);
         return ResponseEntity.ok(user);
     }
 
+    @PreAuthorize("hasAuthority('USER_CREATE')")
     @PostMapping
     public ResponseEntity<UserResponse> createUser(@Valid @RequestBody CreateUserRequest request) {
         UserResponse user = userService.createUser(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
     
+    @PreAuthorize("hasAuthority('USER_UPDATE')")
     @PutMapping("/{id}")
     public ResponseEntity<UserResponse> updateUser(@PathVariable Long id,@Valid @RequestBody CreateUserRequest request) {
         UserResponse user = userService.updateUser(id, request);
@@ -69,23 +76,28 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @PreAuthorize("hasAuthority('USER_LOCK')")
     @PatchMapping("/{id}/lock")
     public ResponseEntity<UserResponse> lockUser(@PathVariable Long id) {
         UserResponse user = userService.lockUser(id);
         return ResponseEntity.ok(user);
     }
 
+    @PreAuthorize("hasAuthority('USER_ACTIVATE')")
     @PatchMapping("/{id}/activate")
     public ResponseEntity<UserResponse> activateUser(@PathVariable Long id) {
         UserResponse user = userService.activateUser(id);
         return ResponseEntity.ok(user);
     }
 
+    @PreAuthorize("hasAuthority('USER_ASSIGN_ROLE')")
     @PostMapping("/{id}/roles")
     public ResponseEntity<UserResponse> assignRole(@PathVariable Long id,@Valid @RequestBody AssignRoleRequest request) {
         UserResponse updated = userService.assignRole(id, request.getRoleId());
         return ResponseEntity.ok(updated);
     }
+
+    @PreAuthorize("hasAuthority('USER_REMOVE_ROLE')")
     @DeleteMapping("/{id}/roles/{roleId}")
     public ResponseEntity<Void> removeRole(@PathVariable Long id, @PathVariable Long roleId) {
         userService.removeRole(id, roleId);
