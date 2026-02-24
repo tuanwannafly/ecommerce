@@ -46,6 +46,7 @@ public class RoleServiceImpl implements RoleService{
     }
 
     @Override
+    @Transactional
     public RoleResponse createRole(CreateRoleRequest role) {
         if(roleRepository.existsByName(role.getName())) {
             throw new UserAlreadyExistsException("Role already exists");
