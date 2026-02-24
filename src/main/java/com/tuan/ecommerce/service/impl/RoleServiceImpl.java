@@ -78,7 +78,7 @@ public class RoleServiceImpl implements RoleService{
         Role role = roleRepository.findById(roleId)
             .orElseThrow(() -> new NoSuchElementException("Role not found"));
         Permission permission = permissionRepository.findById(permissionId)
-            .orElseThrow(() -> new NoSuchElementException("Permisison not found"));
+            .orElseThrow(() -> new NoSuchElementException("Permission not found"));
         role.addPermission(permission);
         return RoleResponse.from(role);
     }
