@@ -21,6 +21,7 @@ public class SecurityConfig {
         return http.csrf(customizer -> customizer.disable()).
                 authorizeHttpRequests(request -> request.anyRequest().authenticated()).
                 httpBasic(Customizer.withDefaults()).
+                requiresChannel(channel -> channel.anyRequest().requiresSecure()).
                 sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).build();
     }
 
