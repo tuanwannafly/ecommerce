@@ -57,13 +57,13 @@ public class RoleServiceImpl implements RoleService{
         return RoleResponse.from(role1);
     }
 
-    @Override
-    @Transactional
+    `@Override`
+    `@Transactional`
     public RoleResponse updateRole(Long id, CreateRoleRequest roleDetail) {
-        Optional<Role> request = roleRepository.findById(id);
-        Role role = request.get();
-        role.setName(role.getName());
-        role.setDescription(role.getDescription());
+        Role role = roleRepository.findById(id)
+            .orElseThrow(() -> new NoSuchElementException("Role not found with id: " + id));
+        role.setName(roleDetail.getName());
+        role.setDescription(roleDetail.getDescription());
         roleRepository.save(role);
         return RoleResponse.from(role);
 
