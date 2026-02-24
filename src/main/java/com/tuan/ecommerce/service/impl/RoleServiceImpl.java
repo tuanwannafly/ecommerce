@@ -38,11 +38,12 @@ public class RoleServiceImpl implements RoleService{
         return roles.map(RoleResponse::from);
     }
 
-    @Override
-    @Transactional(readOnly = true)
+    `@Override`
+    `@Transactional`(readOnly = true)
     public RoleResponse getRoleById(Long roleId) {
-        Optional<Role> role = roleRepository.findById(roleId);
-        return RoleResponse.from(role.get());
+        Role role = roleRepository.findById(roleId)
+            .orElseThrow(() -> new NoSuchElementException("Role not found with id: " + roleId));
+        return RoleResponse.from(role);
     }
 
     @Override
