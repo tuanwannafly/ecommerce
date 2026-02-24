@@ -21,6 +21,9 @@ public class RoleResponse {
     public String getDescription() {
         return description;
     }
+    public Set<String> getPermissionName() {
+        return permissionName;
+    }
     public RoleResponse(Long id, String name, String description) {
         this.id = id;
         this.name = name;
